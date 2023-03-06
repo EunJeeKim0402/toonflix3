@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+import 'package:toonflix3/screens/home_screen.dart';
+import 'package:toonflix3/widgets/button.dart';
+import 'package:toonflix3/widgets/currency_card.dart';
+
+class Player{
+  String? name;
+
+  Player();
+}
+
+void main() {
+  runApp(App());
+}
+
+class App extends StatefulWidget{
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        backgroundColor: const Color(0xFFE7626C),
+        textTheme: const TextTheme(
+          headline1: TextStyle(
+            color: Color(0xFF232B55),
+          ),
+        ),
+        cardColor: const Color(0XFFF4EDDB),
+      ),
+      home: const HomeScreen(),
+    );
+  }
+}
+
+// 그리고 StatefulWidget은 생명주기를 가지고있음. 이벤트에 반응
+class MyLargeTitle extends StatefulWidget {
+  const MyLargeTitle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<MyLargeTitle> createState() => _MyLargeTitleState();
+}
+
+class _MyLargeTitleState extends State<MyLargeTitle> {
+
+  int count = 0;
+
+  // InitState는 상태를 초기화하기위한 메소드
+  // 혹은 int count = 0; 이런식으로 초기화도 가능
+  // InitState는 부모 요소에 의존하는 데이터를 초기화할 때 사용
+  // 무조건 build 메소드보다 먼저 호출되어야 함!(단 한번만 호출됨)
+  @override
+  void initState() {
+    super.initState();
+    print('initState');
+  }
+
+  // dispose는 위젯이 스크린에서 제거될 때 호출되는 메소드
+  // 즉, 무언가를 취소하는 곳
+  @override
+  void dispose() {
+    super.dispose();
+    print('dispose');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('build');
+    return Text(
+      'My Large Title',
+      style: TextStyle(
+          fontSize: 30,
+          color: Theme.of(context).textTheme.titleLarge?.color,
+          //titleLarge! 느낌표는 확신, ?로 할수도있음
+      ),
+    );
+  }
+}
+
